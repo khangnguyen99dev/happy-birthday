@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday ❤️</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎂</text></svg>">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Roboto:wght@400;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .animated-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .animated-background::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(
+                circle,
+                rgba(255,255,255,0.3) 0%,
+                rgba(255,192,203,0.3) 20%,
+                rgba(255,105,180,0.3) 40%,
+                rgba(255,20,147,0.3) 60%,
+                rgba(199,21,133,0.3) 80%,
+                rgba(255,255,255,0) 100%
+            );
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23ff6b6b" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') no-repeat center center;
+            background-size: contain;
+            opacity: 0.7;
+            animation: float 10s linear infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0); }
+            100% { transform: translateY(-100vh) scale(1); }
+        }
+        .bubbles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .bubble {
+            position: absolute;
+            bottom: -50px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: rise 10s infinite ease-in;
+        }
+        .bubble:nth-child(1) {
+            width: 40px;
+            height: 40px;
+            left: 10%;
+            animation-duration: 8s;
+        }
+        .bubble:nth-child(2) {
+            width: 20px;
+            height: 20px;
+            left: 20%;
+            animation-duration: 5s;
+            animation-delay: 1s;
+        }
+        .bubble:nth-child(3) {
+            width: 50px;
+            height: 50px;
+            left: 35%;
+            animation-duration: 7s;
+            animation-delay: 2s;
+        }
+        .bubble:nth-child(4) {
+            width: 80px;
+            height: 80px;
+            left: 50%;
+            animation-duration: 11s;
+            animation-delay: 0s;
+        }
+        .bubble:nth-child(5) {
+            width: 35px;
+            height: 35px;
+            left: 55%;
+            animation-duration: 6s;
+            animation-delay: 1s;
+        }
+        .bubble:nth-child(6) {
+            width: 45px;
+            height: 45px;
+            left: 65%;
+            animation-duration: 8s;
+            animation-delay: 3s;
+        }
+        .bubble:nth-child(7) {
+            width: 90px;
+            height: 90px;
+            left: 70%;
+            animation-duration: 12s;
+            animation-delay: 2s;
+        }
+        .bubble:nth-child(8) {
+            width: 25px;
+            height: 25px;
+            left: 80%;
+            animation-duration: 6s;
+            animation-delay: 2s;
+        }
+        .bubble:nth-child(9) {
+            width: 15px;
+            height: 15px;
+            left: 70%;
+            animation-duration: 5s;
+            animation-delay: 1s;
+        }
+        .bubble:nth-child(10) {
+            width: 90px;
+            height: 90px;
+            left: 25%;
+            animation-duration: 10s;
+            animation-delay: 4s;
+        }
+        @keyframes rise {
+            0% {
+                bottom: -100px;
+                transform: translateX(0);
+            }
+            50% {
+                transform: translate(100px);
+            }
+            100% {
+                bottom: 1080px;
+                transform: translateX(-200px);
+            }
+        }
+        .card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            width: 90%;
+            max-width: 350px;
+            height: 80%;
+            max-height: 500px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5em;
+            color: #ff6b6b;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .balloon {
+            position: absolute;
+            width: 30px;
+            animation: float 10s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
+        }
+        .message {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .message-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            width: 85%;
+            height: 80%;
+            opacity: 0;
+            transition: all 0.3s ease;
+            overflow-y: auto;
+        }
+        .message.show {
+            display: block;
+            opacity: 1;
+        }
+        .message.show .message-content {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 1.5em;
+            color: #ff6b6b;
+            transition: color 0.3s ease;
+        }
+        .close-btn:hover {
+            color: #ff4f4f;
+        }
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 350px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 182, 193, 0.7);
+            border: none;
+            font-size: 2em;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            cursor: pointer;
+            z-index: 10;
+            color: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .slider-btn:hover {
+            background-color: rgba(255, 182, 193, 1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .prev { left: 10px; }
+        .next { right: 10px; }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f0f0f0;
+            animation: confetti-fall 10s linear infinite;
+        }
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(720deg); }
+        }
+        .view-wish-btn {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            margin-top: 15px;
+            align-self: center;
+        }
+        .view-wish-btn:hover {
+            background-color: #ff5252;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            transform: translateY(-2px);
+        }
+        .cute-icon {
+            font-size: 1em;
+            margin: 0 5px;
+            vertical-align: middle;
+        }
+        .fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1001;
+        }
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: white;
+            border-radius: 50%;
+            animation: firework 1s ease-out forwards;
+        }
+        @keyframes firework {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+        .yes-btn, .no-btn {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .yes-btn:hover, .no-btn:hover {
+            background-color: #45a049;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            transform: translateY(-2px);
+        }
+        .no-btn {
+            background-color: #f44336;
+            position: relative;
+        }
+        .no-btn:hover {
+            background-color: #da190b;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1003;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transform: scale(0.7);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        .modal.show {
+            opacity: 1;
+        }
+        .modal.show .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+        .love-popup h1, .angry-popup h1 {
+            font-family: 'Dancing Script', cursive;
+            color: #ff4081;
+            font-size: 2em;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: heartbeat 1.5s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .love-icon {
+            font-size: 1.5em;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        .sad-icon {
+            font-size: 1.5em;
+            margin-left: 10px;
+        }
+        .birthday-wish {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5em;
+            color: #ff4081;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            animation: colorChange 5s infinite alternate;
+        }
+        @keyframes colorChange {
+            0% { color: #ff4081; }
+            50% { color: #ff6b6b; }
+            100% { color: #4CAF50; }
+        }
+        .love-message {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            font-family: 'Dancing Script', cursive;
+            font-size: 24px;
+            color: #ff4081;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        .love-message-content {
+            display: inline-block;
+            padding-left: 100%;
+            animation: slide 15s linear infinite;
+        }
+        @keyframes slide {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+    </style>
+</head>
+<body>
+    <audio id="backgroundMusic" loop>
+        <source src="music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <div class="animated-background"></div>
+    <div class="love-message">
+        <div class="love-message-content">Happy Birthday My Love ❤️ Happy Birthday My Love ❤️ Happy Birthday My Love ❤️ Happy Birthday My Love ❤️ Happy Birthday My Love ❤️</div>
+    </div>
+    <div class="bubbles">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
+    <div class="card">
+        <h1>Chúc Mừng Sinh Nhật!</h1>
+        <div class="slider-container">
+            <div class="slider">
+                <img src="image_1.jpg" class="slide" alt="ảnh 1">
+                <img src="image_2.jpg" class="slide" alt="ảnh 2">
+                <img src="image_3.jpg" class="slide" alt="ảnh 3">
+                <img src="image_4.jpg" class="slide" alt="ảnh 4">
+                <img src="image_5.jpg" class="slide" alt="ảnh 5">
+                <img src="image_6.jpg" class="slide" alt="ảnh 6">
+                <img src="image_7.jpg" class="slide" alt="ảnh 7">
+                <img src="image_8.jpg" class="slide" alt="ảnh 8">
+                <img src="image_9.jpg" class="slide" alt="ảnh 9">
+                <img src="image_10.jpg" class="slide" alt="ảnh 10">
+                <img src="image_11.jpg" class="slide" alt="ảnh 11">
+            </div>
+            <button class="slider-btn prev" onclick="changeSlide(-1)">🌸</button>
+            <button class="slider-btn next" onclick="changeSlide(1)">🌺</button>
+        </div>
+        <button class="view-wish-btn" onclick="showMessage()">Xem lời chúc</button>
+        <div class="message" id="birthdayMessage">
+            <div class="message-content">
+                <span class="close-btn" onclick="closeMessage()">×</span>
+                <h2 class="birthday-wish">Chúc mừng sinh nhật em yêu <span class="cute-icon">❤️ 🎂</span></h2>
+                <p><span class="cute-icon">🌟</span> Chúc bạn một ngày sinh nhật thật vui vẻ và hạnh phúc! <span class="cute-icon">🎉</span></p>
+                <p><span class="cute-icon">🌈</span> Mong rằng năm mới của bạn sẽ tràn đầy niềm vui, sức khỏe và thành công. <span class="cute-icon">🎊</span></p>
+                <p><span class="cute-icon">🍀</span> Chúc bạn luôn xinh đẹp, may mắn và hạnh phúc! <span class="cute-icon">💖</span></p>
+                <h3>Em có nhớ anh không?</h3>
+                <button class="yes-btn" onclick="showFireworks()">Có</button>
+                <button class="no-btn" onclick="moveNoButton()">Không</button>
+            </div>
+        </div>
+    </div>
+    <div class="fireworks" id="fireworks"></div>
+    <div id="lovePopup" class="modal">
+        <div class="modal-content">
+            <h1>Anh cũng nhớ em nhiều 💖</h1>
+        </div>
+    </div>
+    <div id="angryPopup" class="modal">
+        <div class="modal-content">
+            <h1>Đã phát hiện em không nhớ anh <span class="sad-icon">😞</span></h1>
+        </div>
+    </div>
+
+    <script>
+        let noButtonClickCount = 0;
+        let currentIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        let slideInterval;
+
+        function showMessage() {
+            document.getElementById('birthdayMessage').classList.add('show');
+            createConfetti();
+            startBalloonAnimation();
+            resetButtonPositions();
+            document.getElementById('backgroundMusic').play();
+        }
+
+        function closeMessage() {
+            document.getElementById('birthdayMessage').classList.remove('show');
+            stopBalloonAnimation();
+            document.getElementById('backgroundMusic').pause();
+        }
+
+        function changeSlide(direction) {
+            currentIndex = (currentIndex + direction + slides.length) % slides.length;
+            showSlide();
+        }
+
+        function showSlide() {
+            const slider = document.querySelector('.slider');
+            slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        function startSlideShow() {
+            slideInterval = setInterval(() => {
+                changeSlide(1);
+            }, 3000);
+        }
+
+        function stopSlideShow() {
+            clearInterval(slideInterval);
+        }
+
+        function createConfetti() {
+            for (let i = 0; i < 30; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.animationDuration = (Math.random() * 3 + 7) + 's';
+                confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 80000);
+            }
+        }
+
+        function startBalloonAnimation() {
+            const balloons = document.querySelectorAll('.balloon');
+            balloons.forEach(balloon => {
+                balloon.style.animationPlayState = 'running';
+            });
+        }
+
+        function stopBalloonAnimation() {
+            const balloons = document.querySelectorAll('.balloon');
+            balloons.forEach(balloon => {
+                balloon.style.animationPlayState = 'paused';
+            });
+        }
+
+        function showFireworks() {
+            const fireworksContainer = document.getElementById('fireworks');
+            for (let i = 0; i < 20; i++) {
+                const firework = document.createElement('div');
+                firework.classList.add('firework');
+                firework.style.left = Math.random() * 100 + 'vw';
+                firework.style.top = Math.random() * 100 + 'vh';
+                fireworksContainer.appendChild(firework);
+                setTimeout(() => firework.remove(), 1000);
+            }
+            showLovePopup();
+        }
+
+        function showLovePopup() {
+            const lovePopup = document.getElementById('lovePopup');
+            lovePopup.style.display = 'block';
+            setTimeout(() => {
+                lovePopup.classList.add('show');
+            }, 10);
+            setTimeout(() => {
+                lovePopup.classList.remove('show');
+                setTimeout(() => {
+                    lovePopup.style.display = 'none';
+                }, 300);
+            }, 3000);
+        }
+
+        function moveNoButton() {
+            noButtonClickCount++;
+            if (noButtonClickCount > 3) {
+                showAngryPopup();
+                return;
+            }
+            const noBtn = document.querySelector('.no-btn');
+            const messageContent = document.querySelector('.message-content');
+            const maxX = messageContent.clientWidth - noBtn.offsetWidth;
+            const maxY = messageContent.clientHeight - noBtn.offsetHeight;
+            const newX = Math.random() * maxX;
+            const newY = Math.random() * maxY;
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = `${newX}px`;
+            noBtn.style.top = `${newY}px`;
+        }
+
+        function resetButtonPositions() {
+            const yesBtn = document.querySelector('.yes-btn');
+            const noBtn = document.querySelector('.no-btn');
+            yesBtn.style.position = 'static';
+            noBtn.style.position = 'static';
+            noButtonClickCount = 0;
+        }
+
+        function showAngryPopup() {
+            const angryPopup = document.getElementById('angryPopup');
+            angryPopup.style.display = 'block';
+            setTimeout(() => {
+                angryPopup.classList.add('show');
+            }, 10);
+            setTimeout(() => {
+                angryPopup.classList.remove('show');
+                setTimeout(() => {
+                    angryPopup.style.display = 'none';
+                    resetButtonPositions();
+                }, 300);
+            }, 3000);
+        }
+
+        // Start the slideshow when the page loads
+        window.onload = function() {
+            startSlideShow();
+        };
+    </script>
+</body>
+</html>
