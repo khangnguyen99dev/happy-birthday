@@ -239,16 +239,32 @@
             transform: translate(-50%, -50%) scale(1);
         }
         .close-btn {
-            position: absolute;
+            position: sticky;
             top: 10px;
-            right: 10px;
+            right: 0px;
             cursor: pointer;
             font-size: 1.5em;
             color: #ff6b6b;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            float: right;
+            z-index: 1;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         .close-btn:hover {
             color: #ff4f4f;
+            background-color: rgba(255, 255, 255, 1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .close-btn.hidden {
+            opacity: 0;
+            pointer-events: none;
         }
         .slider-container {
             position: relative;
@@ -442,6 +458,7 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
             margin-bottom: 20px;
             animation: colorChange 5s infinite alternate;
+            text-align: center;
         }
         @keyframes colorChange {
             0% { color: #ff4081; }
@@ -477,12 +494,12 @@
 </head>
 <body>
     <audio id="backgroundMusic" loop>
-        <source src="music.mp3" type="audio/mpeg">
+        <!-- <source src="music.mp3" type="audio/mpeg"> -->
         Your browser does not support the audio element.
     </audio>
     <div class="animated-background"></div>
     <div class="love-message">
-        <div class="love-message-content">Happy Birthday My Love ❤️ Happy Birthday My Love ❤️ Happy Birthday My Love ❤️ Happy Birthday My Love ❤️ Happy Birthday My Love ❤️</div>
+        <div class="love-message-content">Happy Birthday My Love 21/10/2024 ❤️ Happy Birthday My Love 21/10/2024 ❤️ Happy Birthday My Love 21/10/2024 ❤️ Happy Birthday My Love 21/10/2024 ❤️ Happy Birthday My Love 21/10/2024 ❤️</div>
     </div>
     <div class="bubbles">
         <div class="bubble"></div>
@@ -497,19 +514,19 @@
         <div class="bubble"></div>
     </div>
     <div class="card">
-        <h1>Chúc Mừng Sinh Nhật Em!</h1>
+        <h1>Chúc Mừng Sinh Nhật!</h1>
         <div class="slider-container">
             <div class="slider">
                 <img src="image_1.jpg" class="slide" alt="ảnh 1">
                 <img src="image_2.jpg" class="slide" alt="ảnh 2">
                 <img src="image_3.jpg" class="slide" alt="ảnh 3">
                 <img src="image_4.jpg" class="slide" alt="ảnh 4">
-                <img src="image_5.jpg" class="slide" alt="ảnh 5">
-                <img src="image_6.jpg" class="slide" alt="ảnh 6">
+                <!-- <img src="image_5.jpg" class="slide" alt="ảnh 5"> -->
+                <!-- <img src="image_6.jpg" class="slide" alt="ảnh 6"> -->
                 <img src="image_7.jpg" class="slide" alt="ảnh 7">
-                <img src="image_8.jpg" class="slide" alt="ảnh 8">
-                <img src="image_9.jpg" class="slide" alt="ảnh 9">
-                <img src="image_10.jpg" class="slide" alt="ảnh 10">
+                <!-- <img src="image_8.jpg" class="slide" alt="ảnh 8"> -->
+                <!-- <img src="image_9.jpg" class="slide" alt="ảnh 9"> -->
+                <!-- <img src="image_10.jpg" class="slide" alt="ảnh 10"> -->
                 <img src="image_11.jpg" class="slide" alt="ảnh 11">
             </div>
             <button class="slider-btn prev" onclick="changeSlide(-1)">🌸</button>
@@ -522,6 +539,8 @@
                 <h2 class="birthday-wish">Chúc mừng sinh nhật em yêu <span class="cute-icon">❤️ 🎂</span></h2>
                 <p><span class="cute-icon">🌟</span> Chúc bạn một ngày sinh nhật thật vui vẻ và hạnh phúc! <span class="cute-icon">🎉</span></p>
                 <p><span class="cute-icon">🌈</span> Mong rằng năm mới của bạn sẽ tràn đầy niềm vui, sức khỏe và thành công. <span class="cute-icon">🎊</span></p>
+                <p><span class="cute-icon">🍀</span> Chúc bạn luôn xinh đẹp, may mắn và hạnh phúc! <span class="cute-icon">💖</span></p>
+                <p><span class="cute-icon">🍀</span> Chúc bạn luôn xinh đẹp, may mắn và hạnh phúc! <span class="cute-icon">💖</span></p>
                 <p><span class="cute-icon">🍀</span> Chúc bạn luôn xinh đẹp, may mắn và hạnh phúc! <span class="cute-icon">💖</span></p>
                 <h3>Em có nhớ anh không?</h3>
                 <button class="yes-btn" onclick="showFireworks()">Có</button>
@@ -546,6 +565,8 @@
         let currentIndex = 0;
         const slides = document.querySelectorAll('.slide');
         let slideInterval;
+        let isScrolling = false;
+        let scrollTimeout;
 
         function showMessage() {
             document.getElementById('birthdayMessage').classList.add('show');
@@ -674,9 +695,22 @@
             }, 3000);
         }
 
+        function handleScroll() {
+            if (!isScrolling) {
+                isScrolling = true;
+                document.querySelector('.close-btn').classList.add('hidden');
+            }
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                isScrolling = false;
+                document.querySelector('.close-btn').classList.remove('hidden');
+            }, 300);
+        }
+
         // Start the slideshow when the page loads
         window.onload = function() {
             startSlideShow();
+            document.querySelector('.message-content').addEventListener('scroll', handleScroll);
         };
     </script>
 </body>
