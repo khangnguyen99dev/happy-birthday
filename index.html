@@ -540,9 +540,11 @@
                 <p><span class="cute-icon">🌈</span> Và rồi một ngày không xa, chúng ta sẽ lại được bên nhau và cùng nhau đi đến những nơi chúng ta chưa từng đi, ăn những món chúng ta chưa từng ăn, để tiếp tục cùng nhau ghi lại những khoảnh khắc đẹp nhất của thanh xuân chúng ta dành cho nhau 🥰💋.  Anh yêu em rất nhiều và anh rất rất nhớ em ❤️😙😙. <span class="cute-icon">🌍</span></p>
                 <p><span class="cute-icon">💭</span> Không có ngày nào trôi qua mà anh không nghĩ về em và về những ngày mà chúng ta lại được ở bên nhau.<span class="cute-icon">⏳</span></p>
                 <p><span class="cute-icon">🎂</span> Chúc mừng sinh nhật, tình yêu của anh 🫶 ❤️😙  <span class="cute-icon">🥳</span></p>
-                <h3>Em có nhớ anh không?</h3>
-                <button class="yes-btn" onclick="showFireworks()">Có</button>
-                <button class="no-btn" onclick="moveNoButton()">Không</button>
+                <div class="yes-no-container">
+                    <h3>Em có nhớ anh không?</h3>
+                    <button class="yes-btn" onclick="showFireworks()">Có</button>
+                    <button class="no-btn" onclick="moveNoButton()">Không</button>
+                </div>
             </div>
         </div>
     </div>
@@ -669,12 +671,14 @@
             const noBtn = document.querySelector('.no-btn');
             const messageContent = document.querySelector('.message-content');
             const maxX = messageContent.clientWidth - noBtn.offsetWidth;
-            const maxY = messageContent.clientHeight - noBtn.offsetHeight;
-            const newX = Math.random() * maxX;
-            const newY = Math.random() * maxY;
+            const visibleHeight = messageContent.clientHeight;
+            const bottomY = messageContent.scrollHeight - visibleHeight;
+            
             noBtn.style.position = 'absolute';
-            noBtn.style.left = `${newX}px`;
-            noBtn.style.top = `${newY}px`;
+            noBtn.style.left = `${Math.random() * maxX}px`;
+            noBtn.style.top = `${bottomY + Math.random() * visibleHeight}px`;
+            
+            messageContent.scrollTop = messageContent.scrollHeight;
         }
 
         function resetButtonPositions() {
